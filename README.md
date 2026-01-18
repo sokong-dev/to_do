@@ -1,18 +1,18 @@
-# Flutter Todo App 📝
+# Flutter Todo App 
 
 A modern Flutter Todo application with real-time synchronization powered by **Supabase** and **GetX** state management.
 
 ## ✨ Features
 
-- ✅ Add, Edit, and Delete tasks
-- ☑️ Mark tasks as complete/incomplete
-- 🔍 Real-time filtering/search
-- 🔄 Real-time sync across all devices using Supabase
-- 🎨 Color-coded tasks with pastel colors
-- 🚫 Duplicate detection with visual feedback
-- 📝 Form validation to prevent empty tasks
-- ⚡ Optimistic updates for instant UI feedback
-- 🎯 Active task counter
+- Add, Edit, and Delete tasks
+- Mark tasks as complete/incomplete
+- Real-time filtering/search
+- Real-time sync across all devices using Supabase
+- Color-coded tasks with pastel colors
+- Duplicate detection with visual feedback
+- Form validation to prevent empty tasks
+- Optimistic updates for instant UI feedback
+- Active task counter
 
 ## � State Management
 
