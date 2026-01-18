@@ -114,7 +114,7 @@ class SupabaseManager {
   /// Initialize persistent stream subscription
   void _initializeStream() {
     try {
-      print('[SupabaseManager] Initializing real-time stream...');
+
 
       _streamSubscription = _client
           .from(_tableName)
@@ -125,27 +125,25 @@ class SupabaseManager {
                 final todos = (data as List<dynamic>)
                     .map((item) => _fromJson(item as Map<String, dynamic>))
                     .toList();
-                print(
-                  '[SupabaseManager] ✅ Stream update received: ${todos.length} items',
-                );
+
                 _todoStreamController.add(todos);
               } catch (e) {
-                print('[SupabaseManager] ❌ Error processing stream data: $e');
+
                 _todoStreamController.addError(e);
               }
             },
             onError: (error) {
-              print('[SupabaseManager] ❌ Stream error: $error');
+
               _todoStreamController.addError(error);
             },
             onDone: () {
-              print('[SupabaseManager] ⚠️ Stream closed, reinitializing...');
+
               Future.delayed(const Duration(seconds: 2), _initializeStream);
             },
             cancelOnError: false,
           );
     } catch (e) {
-      print('[SupabaseManager] ❌ Error initializing stream: $e');
+
     }
   }
 

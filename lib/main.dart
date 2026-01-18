@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Todo Challenge',
+      title: 'Planize',
       theme: ThemeData(
         useMaterial3: true,
         primaryColor: const Color(0xFF31A24C),

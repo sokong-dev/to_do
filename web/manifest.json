@@ -1,6 +1,6 @@
 {
-    "name": "to_do",
-    "short_name": "to_do",
+    "name": "Planize",
+    "short_name": "Planize",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

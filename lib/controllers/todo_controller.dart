@@ -20,22 +20,22 @@ class TodoController extends GetxController {
   void onInit() {
     super.onInit();
     try {
-      print('[TodoController] Subscribing to real-time todos...');
+
       // Listen to real-time changes from Supabase
       supabaseManager.streamAllTodos().listen(
         (data) {
-          print('[TodoController] ✅ Received ${data.length} todos');
+
           todos.value = data;
         },
         onError: (error) {
-          print('[TodoController] ❌ Stream error: $error');
+
         },
         onDone: () {
-          print('[TodoController] ⚠️ Stream closed');
+
         },
       );
     } catch (e) {
-      print('[TodoController] ❌ Error initializing streams: $e');
+
     }
   }
 
