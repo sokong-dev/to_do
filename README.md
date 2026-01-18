@@ -1,52 +1,94 @@
-# VTech Todo Challenge
+# Flutter Todo App 📝
 
-This is a Flutter Todo application built for the VTech Coding Challenge.
+A modern Flutter Todo application with real-time synchronization powered by **Supabase** and **GetX** state management.
 
-## Features
+## ✨ Features
 
-- **Basic Requirement**: Todo list with Input and List elements.
-- **State Management**: Uses **GetX** for state management.
-- **Validations**: Prevents empty and duplicate todos.
-- **Functionalities**:
-  - Add Todo (Enter key)
-  - Remove Todo (Delete button)
-  - Edit Todo (Edit button -> Update button)
-  - Mark as Complete/Incomplete
-  - Filter Todo (Type in input box)
-- **Bonus**:
-  - **Repository Pattern**: Implemented `ITodoRepository` to abstract data source.
-  - **Database Sync**: `FirebaseTodoRepository` code provided in `lib/repositories/firebase_todo_repository.dart` (commented out to avoid build errors without config).
+- ✅ Add, Edit, and Delete tasks
+- ☑️ Mark tasks as complete/incomplete
+- 🔍 Real-time filtering/search
+- 🔄 Real-time sync across all devices using Supabase
+- 🎨 Color-coded tasks with pastel colors
+- 🚫 Duplicate detection with visual feedback
+- 📝 Form validation to prevent empty tasks
+- ⚡ Optimistic updates for instant UI feedback
+- 🎯 Active task counter
 
-## Project Structure
+## � State Management
 
-- `lib/models/`: Data models (`Todo`).
-- `lib/views/`: UI screens (`HomeView`).
-- `lib/controllers/`: State management (`TodoController`).
-- `lib/repositories/`: Data access layer (`ITodoRepository`, `MemoryTodoRepository`, `FirebaseTodoRepository`).
-- `test/`: Unit tests for controller logic.
+This app uses **GetX** for state management, providing:
 
-## How to Run
+- **Reactive Programming** - Observable variables (`.obs`) for automatic UI updates
+- **Dependency Injection** - GetX bindings for clean dependency management
+- **Routing** - GetX navigation system
+- **Snackbars & Dialogs** - Built-in UI feedback mechanisms
 
-1.  Clone the repository.
-2.  Run `flutter pub get`.
-3.  Run `flutter run`.
+Example state management in `TodoController`:
+```dart
+final todos = <Todo>[].obs;  // Observable list
+final input = ''.obs;        // Observable input
 
-## How to Run Tests
+void submit() {
+  // UI updates automatically when todos changes
+  todos.add(newTodo);
+}
+```
 
-Run `flutter test` to verify the logic.
+## 🔄 Database Sync
 
-## Enabling Firebase Sync (Bonus)
+**Supabase** is used as the backend database with real-time synchronization:
 
-To enable real-time synchronization with Firebase:
+- **PostgreSQL Database** - Robust relational database
+- **Real-time Streams** - Instant updates across all connected clients
+- **REST API** - CRUD operations through Supabase client
 
-1.  Add `firebase_core` and `cloud_firestore` to `pubspec.yaml`.
-2.  Uncomment the code in `lib/repositories/firebase_todo_repository.dart`.
-3.  Configure Firebase for your platform (iOS/Android/Web) using `flutterfire configure`.
-4.  In `lib/main.dart`, initialize Firebase:
-    ```dart
-    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-    ```
-5.  In `lib/main.dart`, replace `MemoryTodoRepository` with `FirebaseTodoRepository`:
-    ```dart
-    Get.put<ITodoRepository>(FirebaseTodoRepository());
-    ```
+The `SupabaseManager` handles all database operations:
+```dart
+// Real-time streaming
+_client.from('todos').stream(primaryKey: ['id']).listen((data) {
+  // Auto-updates UI when database changes
+});
+```
+
+Database Schema:
+```sql
+CREATE TABLE todos (
+  id TEXT PRIMARY KEY,
+  text TEXT NOT NULL,
+  is_completed BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+```
+
+## 📚 Libraries
+
+Key dependencies from `pubspec.yaml`:
+
+| Package | Version | Purpose |
+|---------|---------|---------|
+| `get` | ^4.7.3 | State management, routing, and dependency injection |
+| `supabase_flutter` | ^2.5.0 | Backend integration and real-time database sync |
+| `uuid` | ^4.5.2 | Generate unique IDs for todos |
+| `font_awesome_flutter` | ^10.7.0 | Icon library |
+| `flutter_svg` | latest | SVG asset support |
+| `cupertino_icons` | ^1.0.8 | iOS-style icons |
+
+## � Getting Started
+
+1. **Install dependencies**
+   ```bash
+   flutter pub get
+   ```
+
+2. **Configure Supabase** in `lib/main.dart`:
+   ```dart
+   await Supabase.initialize(
+     url: 'YOUR_SUPABASE_URL',
+     anonKey: 'YOUR_SUPABASE_ANON_KEY',
+   );
+   ```
+
+3. **Run the app**
+   ```bash
+   flutter run
+   ```
