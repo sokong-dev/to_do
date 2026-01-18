@@ -1,4 +1,4 @@
-# VTech Todo Challenge
+# Todo Challenge
 
 This is a Flutter Todo application built for the VTech Coding Challenge.
 
@@ -31,22 +31,3 @@ This is a Flutter Todo application built for the VTech Coding Challenge.
 2.  Run `flutter pub get`.
 3.  Run `flutter run`.
 
-## How to Run Tests
-
-Run `flutter test` to verify the logic.
-
-## Enabling Firebase Sync (Bonus)
-
-To enable real-time synchronization with Firebase:
-
-1.  Add `firebase_core` and `cloud_firestore` to `pubspec.yaml`.
-2.  Uncomment the code in `lib/repositories/firebase_todo_repository.dart`.
-3.  Configure Firebase for your platform (iOS/Android/Web) using `flutterfire configure`.
-4.  In `lib/main.dart`, initialize Firebase:
-    ```dart
-    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-    ```
-5.  In `lib/main.dart`, replace `MemoryTodoRepository` with `FirebaseTodoRepository`:
-    ```dart
-    Get.put<ITodoRepository>(FirebaseTodoRepository());
-    ```
